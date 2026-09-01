@@ -1,5 +1,5 @@
 <?php
-$tituloPagina = "Gestión de Categorías - TecnoStock";
+$tituloPagina = "Categorías de Productos - TecnoStock";
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/header.php';
 
@@ -12,81 +12,79 @@ try {
     ");
     $categorias = $stmt->fetchAll();
 } catch (PDOException $e) {
-    echo "<div class='alert alert-danger'>Error al cargar categorías: " . htmlspecialchars($e->getMessage()) . "</div>";
+    echo "<div class='alert alert-minimal-danger p-3 mb-4'>Error al cargar categorías: " . htmlspecialchars($e->getMessage()) . "</div>";
 }
 ?>
 
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
     <div>
-        <h2 class="h3 fw-bold text-dark mb-0">Categorías de Productos</h2>
-        <p class="text-muted small mb-0">Agrupación y clasificación del catálogo de inventario.</p>
+        <h2 class="h4 fw-bold text-dark mb-0">Categorías de Productos</h2>
+        <p class="text-muted small mb-0">Clasificación y agrupación del catálogo.</p>
     </div>
-    <button type="button" class="btn btn-primary rounded-pill px-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalCategoria" onclick="prepararCrearCategoria()">
-        <i class="fa-solid fa-plus-circle me-1"></i> + Nueva Categoría
+    <button type="button" class="btn btn-minimal-primary" data-bs-toggle="modal" data-bs-target="#modalCategoria" onclick="prepararCrearCategoria()">
+        <i class="fa-solid fa-plus me-1.5" style="font-size: 0.8rem;"></i> Nueva Categoría
     </button>
 </div>
 
-<!-- Tabla de Categorías -->
-<div class="card border-0 shadow-sm rounded-3">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-dark">
+<!-- Tabla Minimalista de Categorías -->
+<div class="card card-minimal overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-minimal">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Categoría</th>
+                    <th>Descripción</th>
+                    <th class="text-center">Productos Asociados</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-end">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($categorias)): ?>
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre de Categoría</th>
-                        <th>Descripción</th>
-                        <th class="text-center">Productos Asociados</th>
-                        <th class="text-center">Estado</th>
-                        <th class="text-end">Acciones</th>
+                        <td colspan="6" class="text-center py-5 text-muted small">
+                            No se encontraron categorías registradas.
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php if (empty($categorias)): ?>
-                        <tr>
-                            <td colspan="6" class="text-center py-5 text-muted">
-                                No se encontraron categorías registradas.
+                <?php else: ?>
+                    <?php foreach ($categorias as $cat): ?>
+                        <tr class="<?php echo ($cat['estado'] == 0) ? 'opacity-50' : ''; ?>">
+                            <td><span class="text-muted small" style="font-size: 0.75rem;">#<?php echo $cat['id_categoria']; ?></span></td>
+                            <td class="fw-semibold text-dark"><?php echo htmlspecialchars($cat['nombre']); ?></td>
+                            <td class="small text-muted" style="font-size: 0.8rem;"><?php echo !empty($cat['descripcion']) ? htmlspecialchars($cat['descripcion']) : '&mdash;'; ?></td>
+                            <td class="text-center">
+                                <span class="badge badge-soft-secondary"><?php echo $cat['total_productos']; ?> ítems</span>
+                            </td>
+                            <td class="text-center">
+                                <?php if ($cat['estado'] == 1): ?>
+                                    <span class="badge badge-soft-success">Activa</span>
+                                <?php else: ?>
+                                    <span class="badge badge-soft-danger">Inactiva</span>
+                                <?php endif; ?>
+                            </td>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-minimal-outline py-1 px-2.5 btn-sm" 
+                                        title="Editar Categoría"
+                                        onclick='prepararEditarCategoria(<?php echo json_encode($cat); ?>)'>
+                                    <i class="fa-solid fa-pen me-1" style="font-size: 0.75rem;"></i> Editar
+                                </button>
                             </td>
                         </tr>
-                    <?php else: ?>
-                        <?php foreach ($categorias as $cat): ?>
-                            <tr class="<?php echo ($cat['estado'] == 0) ? 'table-secondary text-muted' : ''; ?>">
-                                <td><span class="text-muted small">#<?php echo $cat['id_categoria']; ?></span></td>
-                                <td class="fw-bold"><?php echo htmlspecialchars($cat['nombre']); ?></td>
-                                <td class="small text-muted"><?php echo !empty($cat['descripcion']) ? htmlspecialchars($cat['descripcion']) : '<em>Sin descripción</em>'; ?></td>
-                                <td class="text-center">
-                                    <span class="badge bg-info text-dark fs-6 px-2"><?php echo $cat['total_productos']; ?></span>
-                                </td>
-                                <td class="text-center">
-                                    <?php if ($cat['estado'] == 1): ?>
-                                        <span class="badge bg-success">Activa</span>
-                                    <?php else: ?>
-                                        <span class="badge bg-danger">Inactiva</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td class="text-end">
-                                    <button type="button" class="btn btn-outline-primary btn-sm" 
-                                            title="Editar Categoría"
-                                            onclick='prepararEditarCategoria(<?php echo json_encode($cat); ?>)'>
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
-<!-- Modal Agregar / Editar Categoría -->
-<div class="modal fade" id="modalCategoria" tabindex="-1" aria-hidden="true">
+<!-- Modal Agregar / Editar Categoría Minimalista -->
+<div class="modal fade modal-minimal" id="modalCategoria" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content border-0 shadow">
-            <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title fw-bold" id="modalCategoriaTitulo"><i class="fa-solid fa-tags me-2 text-primary"></i>Nueva Categoría</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-6 fw-bold text-dark" id="modalCategoriaTitulo"><i class="fa-solid fa-tags me-2 text-primary"></i>Nueva Categoría</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="actions/categoria_action.php" method="POST" id="formCategoria">
                 <input type="hidden" name="action" id="cat_action" value="create">
@@ -94,17 +92,17 @@ try {
 
                 <div class="modal-body p-4">
                     <div class="mb-3">
-                        <label for="cat_nombre" class="form-label fw-bold">Nombre de la Categoría <span class="text-danger">*</span></label>
+                        <label for="cat_nombre" class="form-label small fw-semibold text-secondary">Nombre de Categoría</label>
                         <input type="text" class="form-control" name="nombre" id="cat_nombre" required placeholder="Ej: Redes y Telecomunicaciones">
                     </div>
 
                     <div class="mb-3">
-                        <label for="cat_descripcion" class="form-label fw-bold">Descripción</label>
-                        <textarea class="form-control" name="descripcion" id="cat_descripcion" rows="3" placeholder="Descripción breve de los tipos de productos..."></textarea>
+                        <label for="cat_descripcion" class="form-label small fw-semibold text-secondary">Descripción</label>
+                        <textarea class="form-control" name="descripcion" id="cat_descripcion" rows="3" placeholder="Descripción breve..."></textarea>
                     </div>
 
                     <div class="mb-3" id="group_cat_estado" style="display: none;">
-                        <label class="form-label fw-bold">Estado</label>
+                        <label class="form-label small fw-semibold text-secondary">Estado</label>
                         <select name="estado" id="cat_estado" class="form-select">
                             <option value="1">Activa</option>
                             <option value="0">Inactiva</option>
@@ -112,9 +110,9 @@ try {
                     </div>
                 </div>
 
-                <div class="modal-footer bg-light">
-                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold" id="btnGuardarCategoria">Guardar Categoría</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-minimal-outline btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-minimal-primary btn-sm px-4" id="btnGuardarCategoria">Guardar Categoría</button>
                 </div>
             </form>
         </div>
