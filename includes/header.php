@@ -28,8 +28,8 @@ $paginaActual = basename($_SERVER['PHP_SELF']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Minimalist Custom CSS (v4.0 Dark Mode Hover Cache Buster) -->
-    <link rel="stylesheet" href="assets/css/style.css?v=4.0">
+    <!-- Minimalist Custom CSS (v5.0 Button Hovers Cache Buster) -->
+    <link rel="stylesheet" href="assets/css/style.css?v=5.0">
 </head>
 <body>
 

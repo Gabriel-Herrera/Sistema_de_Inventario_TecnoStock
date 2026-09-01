@@ -378,23 +378,40 @@ code {
     border-color: #334155 !important;
 }
 
-/* Botones Minimalistas y Hover en Modo Oscuro */
-.btn-minimal-primary {
-    background-color: var(--btn-primary-bg);
-    color: var(--btn-primary-text);
-    border: 1px solid var(--btn-primary-bg);
+/* ============================================================
+   ESTILOS DE BOTONES Y ESTADOS HOVER COMPLETOS (AMBOS TEMAS)
+   ============================================================ */
+
+.btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 1. Botón Principal (Primary) */
+.btn-minimal-primary, .btn-primary {
+    background-color: var(--btn-primary-bg) !important;
+    color: var(--btn-primary-text) !important;
+    border: 1px solid var(--btn-primary-bg) !important;
     border-radius: var(--radius-sm);
     font-weight: 500;
     font-size: 0.875rem;
     padding: 0.55rem 1.1rem;
-    transition: all 0.15s ease;
 }
 
-.btn-minimal-primary:hover {
-    opacity: 0.9;
-    color: var(--btn-primary-text);
+.btn-minimal-primary:hover, .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    opacity: 0.92;
 }
 
+[data-theme="dark"] .btn-minimal-primary:hover,
+[data-theme="dark"] .btn-primary:hover {
+    background-color: #7dd3fc !important;
+    border-color: #7dd3fc !important;
+    color: #0f172a !important;
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3) !important;
+}
+
+/* 2. Botón Secundario / Outline */
 .btn-minimal-outline {
     background-color: transparent;
     color: var(--text-primary);
@@ -403,19 +420,145 @@ code {
     font-weight: 500;
     font-size: 0.875rem;
     padding: 0.55rem 1.1rem;
-    transition: all 0.15s ease;
 }
 
 .btn-minimal-outline:hover {
-    background-color: var(--table-row-hover);
-    border-color: var(--border-hover);
-    color: var(--text-primary);
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #0f172a;
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-minimal-outline {
+    color: #f8fafc !important;
+    border-color: #334155 !important;
 }
 
 [data-theme="dark"] .btn-minimal-outline:hover {
     background-color: #334155 !important;
     border-color: #475569 !important;
     color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    transform: translateY(-1px);
+}
+
+/* 3. Botones Bootstrap Oscuros (.btn-dark) */
+.btn-dark {
+    background-color: #0f172a !important;
+    border-color: #0f172a !important;
+    color: #ffffff !important;
+}
+
+.btn-dark:hover {
+    background-color: #1e293b !important;
+    border-color: #1e293b !important;
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-dark {
+    background-color: #334155 !important;
+    border-color: #475569 !important;
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .btn-dark:hover {
+    background-color: #475569 !important;
+    border-color: #64748b !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+/* 4. Botón de Alternancia de Tema (#themeToggleBtn) */
+#themeToggleBtn {
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#themeToggleBtn:hover {
+    transform: scale(1.1);
+    background-color: rgba(37, 99, 235, 0.1) !important;
+}
+
+[data-theme="dark"] #themeToggleBtn:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* 5. Botones de Acción en Tablas (Editar, Entrar Stock, Desactivar) */
+.btn-outline-primary {
+    border-color: #3b82f6;
+    color: #2563eb;
+}
+
+.btn-outline-primary:hover {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    border-color: #2563eb !important;
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-outline-primary {
+    border-color: #38bdf8 !important;
+    color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .btn-outline-primary:hover {
+    background-color: #38bdf8 !important;
+    color: #0f172a !important;
+    border-color: #38bdf8 !important;
+    transform: translateY(-1px);
+}
+
+.btn-outline-success, .btn-quick-entrada {
+    border-color: #10b981;
+    color: #059669;
+}
+
+.btn-outline-success:hover, .btn-quick-entrada:hover {
+    background-color: #10b981 !important;
+    color: #ffffff !important;
+    border-color: #10b981 !important;
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-outline-success,
+[data-theme="dark"] .btn-quick-entrada {
+    border-color: #34d399 !important;
+    color: #34d399 !important;
+    background-color: rgba(52, 211, 153, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-outline-success:hover,
+[data-theme="dark"] .btn-quick-entrada:hover {
+    background-color: #34d399 !important;
+    color: #0f172a !important;
+    border-color: #34d399 !important;
+    transform: translateY(-1px);
+}
+
+.btn-outline-warning, .btn-outline-danger {
+    border-color: #ef4444;
+    color: #dc2626;
+}
+
+.btn-outline-warning:hover, .btn-outline-danger:hover {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+    border-color: #ef4444 !important;
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-outline-warning,
+[data-theme="dark"] .btn-outline-danger {
+    border-color: #f87171 !important;
+    color: #f87171 !important;
+    background-color: rgba(248, 113, 113, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-outline-warning:hover,
+[data-theme="dark"] .btn-outline-danger:hover {
+    background-color: #f87171 !important;
+    color: #0f172a !important;
+    border-color: #f87171 !important;
+    transform: translateY(-1px);
 }
 
 /* Modales Minimalistas */

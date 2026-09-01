@@ -13,7 +13,7 @@
 
 <!-- Bootstrap 5 JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Custom JavaScript (v4.0 Cache Buster) -->
-<script src="assets/js/main.js?v=4.0"></script>
+<!-- Custom JavaScript (v5.0 Cache Buster) -->
+<script src="assets/js/main.js?v=5.0"></script>
 </body>
 </html>
