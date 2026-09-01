@@ -158,6 +158,11 @@ main {
     font-weight: 600;
 }
 
+[data-theme="dark"] .navbar-minimal .nav-link:hover {
+    color: #ffffff !important;
+    background-color: #334155 !important;
+}
+
 /* Tarjetas Minimalistas */
 .card-minimal {
     background-color: var(--card-bg);
@@ -237,7 +242,7 @@ main {
     border-bottom: none;
 }
 
-/* Forzar colores de celda y texto de tabla en Modo Oscuro */
+/* Forzar colores de celda, texto y HOVER de tabla en Modo Oscuro */
 [data-theme="dark"] .table,
 [data-theme="dark"] .table-minimal,
 [data-theme="dark"] .table td,
@@ -249,6 +254,25 @@ main {
     --bs-table-bg: transparent !important;
     --bs-table-hover-color: #ffffff !important;
     --bs-table-hover-bg: #334155 !important;
+}
+
+/* Reglas Estrictas de HOVER en Modo Oscuro para Filas y Texto */
+[data-theme="dark"] .table tbody tr:hover,
+[data-theme="dark"] .table-minimal tbody tr:hover,
+[data-theme="dark"] .table-hover tbody tr:hover {
+    background-color: #334155 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .table tbody tr:hover td,
+[data-theme="dark"] .table-minimal tbody tr:hover td,
+[data-theme="dark"] .table-hover tbody tr:hover td,
+[data-theme="dark"] .table tbody tr:hover td .text-dark,
+[data-theme="dark"] .table tbody tr:hover td .text-muted,
+[data-theme="dark"] .table tbody tr:hover td .text-secondary,
+[data-theme="dark"] .table tbody tr:hover td div,
+[data-theme="dark"] .table tbody tr:hover td span {
+    color: #ffffff !important;
 }
 
 /* Códigos de Producto (TEC-001) con Resaltado Celeste Claro */
@@ -265,6 +289,11 @@ code {
     color: #38bdf8 !important;
     background-color: #0f172a !important;
     border: 1px solid #334155;
+}
+
+[data-theme="dark"] tr:hover code {
+    background-color: #1e293b !important;
+    color: #7dd3fc !important;
 }
 
 /* Badges Soft / Minimal con Alto Contraste */
@@ -349,7 +378,7 @@ code {
     border-color: #334155 !important;
 }
 
-/* Botones Minimalistas */
+/* Botones Minimalistas y Hover en Modo Oscuro */
 .btn-minimal-primary {
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-text);
@@ -381,6 +410,12 @@ code {
     background-color: var(--table-row-hover);
     border-color: var(--border-hover);
     color: var(--text-primary);
+}
+
+[data-theme="dark"] .btn-minimal-outline:hover {
+    background-color: #334155 !important;
+    border-color: #475569 !important;
+    color: #ffffff !important;
 }
 
 /* Modales Minimalistas */
