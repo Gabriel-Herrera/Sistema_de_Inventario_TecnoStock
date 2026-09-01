@@ -1,11 +1,31 @@
 /**
- * LÓGICA Y VALIDACIONES JAVASCRIPT CLIENTE
+ * LÓGICA Y VALIDACIONES JAVASCRIPT CLIENTE + MODO OSCURO
  * Sistema de Inventario TecnoStock
  */
 
+// Inicialización Inmediata de Tema (evita parpadeo al cargar)
+(function () {
+    const savedTheme = localStorage.getItem('tecnostock_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
     
-    // Auto-cierre de alertas después de 5 segundos
+    // Configurar Botón de Alternar Modo Oscuro
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (themeToggleBtn) {
+        actualizarIconoTema();
+        themeToggleBtn.addEventListener('click', function () {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = (currentTheme === 'light') ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('tecnostock_theme', newTheme);
+            actualizarIconoTema();
+        });
+    }
+
+    // Auto-cierre de alertas después de 6 segundos
     const alertList = document.querySelectorAll('.alert-dismissible');
     alertList.forEach(function (alertEl) {
         setTimeout(function () {
@@ -67,6 +87,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// Función para actualizar el icono Sol/Luna en el botón de tema
+function actualizarIconoTema() {
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (!themeToggleBtn) return;
+    
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    if (currentTheme === 'dark') {
+        themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun text-warning" title="Cambiar a Modo Claro"></i>';
+    } else {
+        themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon text-secondary" title="Cambiar a Modo Oscuro"></i>';
+    }
+}
 
 // Preparar modal para crear nuevo producto
 function prepararCrearProducto() {

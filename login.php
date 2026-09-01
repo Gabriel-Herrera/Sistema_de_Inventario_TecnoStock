@@ -14,6 +14,13 @@ if (isset($_SESSION['usuario_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - TecnoStock</title>
+    <!-- Script de Inicialización de Tema para Evitar Parpadeo Flash -->
+    <script>
+        (function() {
+            var theme = localStorage.getItem('tecnostock_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,7 +28,14 @@ if (isset($_SESSION['usuario_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-light d-flex align-items-center justify-content-center min-vh-100 py-4">
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100 py-4 position-relative">
+
+<!-- Botón de Tema Flotante en Login -->
+<div class="position-absolute top-0 end-0 p-4">
+    <button type="button" id="themeToggleBtn" class="btn btn-minimal-outline btn-sm px-2.5 py-1.5 rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;" title="Cambiar Tema (Modo Claro / Modo Oscuro)">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+</div>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -74,5 +88,6 @@ if (isset($_SESSION['usuario_id'])) {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

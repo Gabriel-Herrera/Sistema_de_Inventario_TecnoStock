@@ -1,9 +1,10 @@
 /* ============================================================
-   ESTÉTIKA MINIMALISTA - TECNOSTOCK INVENTARIO
+   ESTÉTICA MINIMALISTA CON MODO OSCURO (TECNOSTOCK INVENTARIO)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Variables Tema Claro (Por Defecto) */
 :root {
     --bg-main: #f8fafc;
     --card-bg: #ffffff;
@@ -12,6 +13,10 @@
     --text-muted: #94a3b8;
     --border-color: #e2e8f0;
     --border-hover: #cbd5e1;
+
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --table-header-bg: #f8fafc;
+    --table-row-hover: #f1f5f9;
 
     --accent-blue: #2563eb;
     --accent-blue-soft: #eff6ff;
@@ -25,10 +30,44 @@
     --accent-warning: #f59e0b;
     --accent-warning-soft: #fffbeb;
 
+    --modal-footer-bg: #f8fafc;
+    --input-bg: #ffffff;
+    --btn-primary-bg: #0f172a;
+    --btn-primary-text: #ffffff;
+
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
     --radius-xl: 24px;
+}
+
+/* Variables Tema Oscuro */
+[data-theme="dark"] {
+    --bg-main: #0b0f17;
+    --card-bg: #151d2a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-color: #232d3f;
+    --border-hover: #334155;
+
+    --navbar-bg: rgba(21, 29, 42, 0.95);
+    --table-header-bg: #0f172a;
+    --table-row-hover: #1e293b;
+
+    --accent-blue: #3b82f6;
+    --accent-blue-soft: rgba(59, 130, 246, 0.15);
+    
+    --accent-success: #10b981;
+    --accent-success-soft: rgba(16, 185, 129, 0.15);
+    
+    --accent-danger: #f87171;
+    --accent-danger-soft: rgba(239, 68, 68, 0.15);
+
+    --modal-footer-bg: #0f172a;
+    --input-bg: #0f172a;
+    --btn-primary-bg: #3b82f6;
+    --btn-primary-text: #ffffff;
 }
 
 body {
@@ -40,17 +79,36 @@ body {
     flex-direction: column;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 main {
     flex: 1;
 }
 
+/* Override utility text classes for Dark Mode compatibility */
+[data-theme="dark"] .text-dark {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .text-muted {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .bg-white {
+    background-color: var(--card-bg) !important;
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: var(--bg-main) !important;
+}
+
 /* Navbar Minimalista */
 .navbar-minimal {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: var(--navbar-bg);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .navbar-minimal .navbar-brand {
@@ -71,7 +129,7 @@ main {
 
 .navbar-minimal .nav-link:hover {
     color: var(--text-primary);
-    background-color: #f1f5f9;
+    background-color: var(--table-row-hover);
 }
 
 .navbar-minimal .nav-link.active {
@@ -85,13 +143,13 @@ main {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.25s ease;
 }
 
 .card-minimal:hover {
     border-color: var(--border-hover);
-    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
 }
 
 .card-metric-title {
@@ -118,13 +176,18 @@ main {
     justify-content: center;
 }
 
+[data-theme="dark"] .bg-light.icon-box-soft {
+    background-color: #1e293b !important;
+}
+
 /* Tablas Limpias */
 .table-minimal {
     margin-bottom: 0;
+    color: var(--text-primary);
 }
 
 .table-minimal thead th {
-    background-color: #f8fafc;
+    background-color: var(--table-header-bg);
     color: var(--text-secondary);
     font-size: 0.75rem;
     font-weight: 600;
@@ -137,7 +200,7 @@ main {
 .table-minimal tbody td {
     padding: 0.95rem 1.25rem;
     color: var(--text-primary);
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border-color);
     font-size: 0.875rem;
     vertical-align: middle;
 }
@@ -147,7 +210,7 @@ main {
 }
 
 .table-minimal tbody tr:hover {
-    background-color: #f8fafc;
+    background-color: var(--table-row-hover);
 }
 
 .table-minimal tbody tr:last-child td {
@@ -157,8 +220,8 @@ main {
 /* Badges Soft / Minimal */
 .badge-soft-success {
     background-color: var(--accent-success-soft);
-    color: #047857;
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
     font-weight: 500;
     padding: 0.35em 0.75em;
     border-radius: 9999px;
@@ -166,17 +229,17 @@ main {
 
 .badge-soft-danger {
     background-color: var(--accent-danger-soft);
-    color: #b91c1c;
-    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
     font-weight: 500;
     padding: 0.35em 0.75em;
     border-radius: 9999px;
 }
 
 .badge-soft-secondary {
-    background-color: #f1f5f9;
-    color: #475569;
-    border: 1px solid #e2e8f0;
+    background-color: var(--table-row-hover);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
     font-weight: 500;
     padding: 0.35em 0.75em;
     border-radius: 9999px;
@@ -189,21 +252,33 @@ main {
     padding: 0.6rem 0.85rem;
     font-size: 0.875rem;
     color: var(--text-primary);
-    background-color: #ffffff;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    background-color: var(--input-bg);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.25s ease, color 0.25s ease;
 }
 
 .form-control:focus, .form-select:focus {
     border-color: var(--accent-blue);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
     outline: none;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.input-group-text {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
 }
 
 /* Botones Minimalistas */
 .btn-minimal-primary {
-    background-color: #0f172a;
-    color: #ffffff;
-    border: 1px solid #0f172a;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: 1px solid var(--btn-primary-bg);
     border-radius: var(--radius-sm);
     font-weight: 500;
     font-size: 0.875rem;
@@ -212,8 +287,7 @@ main {
 }
 
 .btn-minimal-primary:hover {
-    background-color: #1e293b;
-    border-color: #1e293b;
+    opacity: 0.9;
     color: #ffffff;
 }
 
@@ -229,22 +303,23 @@ main {
 }
 
 .btn-minimal-outline:hover {
-    background-color: #f8fafc;
+    background-color: var(--table-row-hover);
     border-color: var(--border-hover);
     color: var(--text-primary);
 }
 
 /* Modales Minimalistas */
 .modal-minimal .modal-content {
+    background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
 .modal-minimal .modal-header {
     border-bottom: 1px solid var(--border-color);
     padding: 1.25rem 1.5rem;
-    background-color: #ffffff;
+    background-color: var(--card-bg);
     border-top-left-radius: var(--radius-lg);
     border-top-right-radius: var(--radius-lg);
 }
@@ -252,22 +327,26 @@ main {
 .modal-minimal .modal-footer {
     border-top: 1px solid var(--border-color);
     padding: 1rem 1.5rem;
-    background-color: #f8fafc;
+    background-color: var(--modal-footer-bg);
     border-bottom-left-radius: var(--radius-lg);
     border-bottom-right-radius: var(--radius-lg);
 }
 
-/* Banner de Alerta Soft */
+[data-theme="dark"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Banner de Alertas Soft */
 .alert-minimal-danger {
     background-color: var(--accent-danger-soft);
-    border: 1px solid rgba(239, 68, 68, 0.2);
-    color: #991b1b;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
     border-radius: var(--radius-md);
 }
 
 .alert-minimal-success {
     background-color: var(--accent-success-soft);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    color: #065f46;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
     border-radius: var(--radius-md);
 }

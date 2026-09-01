@@ -13,6 +13,13 @@ $paginaActual = basename($_SERVER['PHP_SELF']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $tituloPagina ?? 'TecnoStock - Inventario Minimalista'; ?></title>
+    <!-- Script de Inicialización de Tema para Evitar Parpadeo Flash -->
+    <script>
+        (function() {
+            var theme = localStorage.getItem('tecnostock_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,10 +72,16 @@ $paginaActual = basename($_SERVER['PHP_SELF']);
             </ul>
 
             <div class="d-flex align-items-center gap-3">
+                <!-- Botón de Alternar Modo Oscuro -->
+                <button type="button" id="themeToggleBtn" class="btn btn-minimal-outline btn-sm px-2.5 py-1.5 rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;" title="Cambiar Tema (Modo Claro / Modo Oscuro)">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
                 <div class="text-end d-none d-md-block">
                     <div class="fw-semibold text-dark small" style="line-height: 1.2;"><?php echo htmlspecialchars($usuario['nombre']); ?></div>
                     <div class="text-muted" style="font-size: 0.75rem;"><?php echo htmlspecialchars($usuario['correo']); ?></div>
                 </div>
+
                 <a href="logout.php" class="btn btn-minimal-outline btn-sm px-3" title="Cerrar Sesión">
                     <i class="fa-solid fa-arrow-right-from-bracket me-1 text-danger"></i> Salir
                 </a>
