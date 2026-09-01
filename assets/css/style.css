@@ -41,33 +41,33 @@
     --radius-xl: 24px;
 }
 
-/* Variables Tema Oscuro */
+/* Variables Tema Oscuro - Alto Contraste */
 [data-theme="dark"] {
-    --bg-main: #0b0f17;
-    --card-bg: #151d2a;
+    --bg-main: #0f172a;
+    --card-bg: #1e293b;
     --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --border-color: #232d3f;
-    --border-hover: #334155;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --border-hover: #475569;
 
-    --navbar-bg: rgba(21, 29, 42, 0.95);
+    --navbar-bg: rgba(30, 41, 59, 0.95);
     --table-header-bg: #0f172a;
-    --table-row-hover: #1e293b;
+    --table-row-hover: #334155;
 
-    --accent-blue: #3b82f6;
-    --accent-blue-soft: rgba(59, 130, 246, 0.15);
+    --accent-blue: #38bdf8;
+    --accent-blue-soft: rgba(56, 189, 248, 0.15);
     
-    --accent-success: #10b981;
-    --accent-success-soft: rgba(16, 185, 129, 0.15);
+    --accent-success: #34d399;
+    --accent-success-soft: rgba(52, 211, 153, 0.15);
     
     --accent-danger: #f87171;
-    --accent-danger-soft: rgba(239, 68, 68, 0.15);
+    --accent-danger-soft: rgba(248, 113, 113, 0.15);
 
     --modal-footer-bg: #0f172a;
     --input-bg: #0f172a;
-    --btn-primary-bg: #3b82f6;
-    --btn-primary-text: #ffffff;
+    --btn-primary-bg: #38bdf8;
+    --btn-primary-text: #0f172a;
 }
 
 body {
@@ -86,21 +86,41 @@ main {
     flex: 1;
 }
 
-/* Override utility text classes for Dark Mode compatibility */
-[data-theme="dark"] .text-dark {
+/* Overrides de Clases bootstrap para Modo Oscuro con Alto Contraste */
+[data-theme="dark"] .text-dark,
+[data-theme="dark"] td .text-dark,
+[data-theme="dark"] th .text-dark,
+[data-theme="dark"] .fw-bold.text-dark,
+[data-theme="dark"] .fw-semibold.text-dark,
+[data-theme="dark"] .h3.text-dark,
+[data-theme="dark"] .h4.text-dark,
+[data-theme="dark"] .h5.text-dark {
     color: #f8fafc !important;
 }
 
-[data-theme="dark"] .text-muted {
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] td .text-muted,
+[data-theme="dark"] span.text-muted,
+[data-theme="dark"] div.text-muted,
+[data-theme="dark"] p.text-muted,
+[data-theme="dark"] td.text-muted {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] td .text-secondary,
+[data-theme="dark"] span.text-secondary {
     color: #94a3b8 !important;
 }
 
 [data-theme="dark"] .bg-white {
     background-color: var(--card-bg) !important;
+    color: var(--text-primary) !important;
 }
 
 [data-theme="dark"] .bg-light {
     background-color: var(--bg-main) !important;
+    color: var(--text-primary) !important;
 }
 
 /* Navbar Minimalista */
@@ -177,10 +197,10 @@ main {
 }
 
 [data-theme="dark"] .bg-light.icon-box-soft {
-    background-color: #1e293b !important;
+    background-color: #334155 !important;
 }
 
-/* Tablas Limpias */
+/* Tablas Limpias y Alto Contraste */
 .table-minimal {
     margin-bottom: 0;
     color: var(--text-primary);
@@ -217,11 +237,41 @@ main {
     border-bottom: none;
 }
 
-/* Badges Soft / Minimal */
+/* Forzar colores de celda y texto de tabla en Modo Oscuro */
+[data-theme="dark"] .table,
+[data-theme="dark"] .table-minimal,
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th,
+[data-theme="dark"] .table-minimal td,
+[data-theme="dark"] .table-minimal th {
+    color: #f8fafc !important;
+    --bs-table-color: #f8fafc !important;
+    --bs-table-bg: transparent !important;
+    --bs-table-hover-color: #ffffff !important;
+    --bs-table-hover-bg: #334155 !important;
+}
+
+/* Códigos de Producto (TEC-001) con Resaltado Celeste Claro */
+code {
+    color: #0284c7;
+    background-color: #f0f9ff;
+    padding: 0.2rem 0.45rem;
+    border-radius: var(--radius-sm);
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.85em;
+}
+
+[data-theme="dark"] code {
+    color: #38bdf8 !important;
+    background-color: #0f172a !important;
+    border: 1px solid #334155;
+}
+
+/* Badges Soft / Minimal con Alto Contraste */
 .badge-soft-success {
     background-color: var(--accent-success-soft);
-    color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #047857;
+    border: 1px solid rgba(16, 185, 129, 0.2);
     font-weight: 500;
     padding: 0.35em 0.75em;
     border-radius: 9999px;
@@ -229,8 +279,8 @@ main {
 
 .badge-soft-danger {
     background-color: var(--accent-danger-soft);
-    color: #f87171;
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #b91c1c;
+    border: 1px solid rgba(239, 68, 68, 0.2);
     font-weight: 500;
     padding: 0.35em 0.75em;
     border-radius: 9999px;
@@ -245,7 +295,25 @@ main {
     border-radius: 9999px;
 }
 
-/* Form Inputs */
+[data-theme="dark"] .badge-soft-success {
+    background-color: rgba(52, 211, 153, 0.15) !important;
+    color: #34d399 !important;
+    border: 1px solid rgba(52, 211, 153, 0.3) !important;
+}
+
+[data-theme="dark"] .badge-soft-danger {
+    background-color: rgba(248, 113, 113, 0.15) !important;
+    color: #f87171 !important;
+    border: 1px solid rgba(248, 113, 113, 0.3) !important;
+}
+
+[data-theme="dark"] .badge-soft-secondary {
+    background-color: #334155 !important;
+    color: #cbd5e1 !important;
+    border: 1px solid #475569 !important;
+}
+
+/* Form Inputs en Modo Oscuro */
 .form-control, .form-select {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
@@ -258,20 +326,27 @@ main {
 
 .form-control:focus, .form-select:focus {
     border-color: var(--accent-blue);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
     outline: none;
     background-color: var(--input-bg);
     color: var(--text-primary);
 }
 
-.form-control::placeholder {
-    color: var(--text-muted);
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
 }
 
-.input-group-text {
-    background-color: var(--input-bg);
-    border-color: var(--border-color);
-    color: var(--text-secondary);
+[data-theme="dark"] .form-control::placeholder {
+    color: #64748b !important;
+}
+
+[data-theme="dark"] .input-group-text {
+    background-color: #0f172a !important;
+    color: #cbd5e1 !important;
+    border-color: #334155 !important;
 }
 
 /* Botones Minimalistas */
@@ -288,7 +363,7 @@ main {
 
 .btn-minimal-primary:hover {
     opacity: 0.9;
-    color: #ffffff;
+    color: var(--btn-primary-text);
 }
 
 .btn-minimal-outline {
@@ -336,7 +411,7 @@ main {
     filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-/* Banner de Alertas Soft */
+/* Banners de Alerta Soft */
 .alert-minimal-danger {
     background-color: var(--accent-danger-soft);
     border: 1px solid rgba(239, 68, 68, 0.3);
@@ -347,6 +422,6 @@ main {
 .alert-minimal-success {
     background-color: var(--accent-success-soft);
     border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #10b981;
+    color: #34d399;
     border-radius: var(--radius-md);
 }
