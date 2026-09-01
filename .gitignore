@@ -10,3 +10,6 @@ Thumbs.db
 # Archivos de respaldo
 *.bak
 *.sql.bak
+
+# Archivos de la pauta/instrucción de evaluación (.docx)
+*.docx
