@@ -1,0 +1,47 @@
+/* ============================================================
+   ESTILOS PERSONALIZADOS: TECNOSTOCK INVENTARIO
+   ============================================================ */
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+}
+
+main {
+    flex: 1;
+}
+
+/* Transiciones suaves en tablas y botones */
+.table-hover tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.card {
+    transition: transform 0.2s ease, shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.08) !important;
+}
+
+/* Alertas de Stock */
+.table-danger-subtle {
+    background-color: #fff5f5 !important;
+}
+
+.badge {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Custom scrollbars para tablas grandes */
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px;
+}
