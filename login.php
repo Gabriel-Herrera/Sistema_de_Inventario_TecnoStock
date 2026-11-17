@@ -77,9 +77,9 @@ if (isset($_SESSION['usuario_id'])) {
                     </button>
                 </form>
 
-                <div class="mt-4 pt-3 border-top text-center text-muted" style="font-size: 0.75rem;">
+                <!-- <div class="mt-4 pt-3 border-top text-center text-muted" style="font-size: 0.75rem;">
                     Acceso Demo: <strong class="text-dark">admin@tecnostock.cl</strong> &middot; <strong class="text-dark">admin123</strong>
-                </div>
+                </div> -->
 
             </div>
 

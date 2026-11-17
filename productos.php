@@ -31,8 +31,11 @@ try {
     }
 
     if (!empty($busqueda)) {
-        $sql .= " AND (p.codigo LIKE :busqueda OR p.nombre LIKE :busqueda OR c.nombre LIKE :busqueda)";
-        $params[':busqueda'] = "%$busqueda%";
+        $sql .= " AND (p.codigo LIKE :b_codigo OR p.nombre LIKE :b_nombre OR c.nombre LIKE :b_categoria)";
+        $searchTerm = "%$busqueda%";
+        $params[':b_codigo']    = $searchTerm;
+        $params[':b_nombre']    = $searchTerm;
+        $params[':b_categoria'] = $searchTerm;
     }
 
     $sql .= " ORDER BY p.nombre ASC";
